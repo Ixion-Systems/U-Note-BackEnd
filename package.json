@@ -1,0 +1,29 @@
+{
+  "name": "u-note-backend",
+  "version": "1.0.0",
+  "description": "Backend oficial de U-Notes. Servidor encargado de la persistencia de datos, gestión de usuarios de la comunidad estudiantil y optimización de rutas para la carga y descarga ágil de apuntes académicos.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ixion-Systems/U-Note-BackEnd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Ixion-Systems/U-Note-BackEnd/issues"
+  },
+  "homepage": "https://github.com/Ixion-Systems/U-Note-BackEnd#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.22.4"
+  }
+}
