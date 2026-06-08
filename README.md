@@ -1,24 +1,26 @@
-<div align="center">
-  <img src="assets/U-NOTES%20LOGO%20Orange.svg" alt="U-Notes Logo" width="200" style="margin-bottom: 20px;" />
+# U-Notes // Backend API
 
-  # U-Notes // Backend API
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+![JWT](https://img.shields.io/badge/JSON_Web_Tokens-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white)
+![Multer](https://img.shields.io/badge/Multer-F24E1E?style=for-the-badge&logo=npm&logoColor=white)
 
-  ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-  ![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
-  ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
-  ![JWT](https://img.shields.io/badge/JSON_Web_Tokens-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white)
-</div>
+Technical documentation for the **U-Notes Backend Repository**. This Node.js/Express server is the secure REST API for the U-Notes platform, managing user authentication, database connections, and file processing.
 
-Welcome to the backend repository for **U-Notes**. This Node.js/Express server acts as the secure backbone for the U-Notes platform, handling user authentication, database connections, and (in upcoming modules) strict local file processing.
+## Tech Stack & Dependencies
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **Database:** MySQL 8.0+
+- **Authentication:** jsonwebtoken (JWT), bcrypt (Password Hashing)
+- **File Handling:** Multer (Multipart form data processing)
+- **Database Driver:** mysql2/promise
 
-## Architecture & Security
-To ensure maximum security against SQL Injections and data breaches, this backend **does not execute raw SQL queries**. 
-Instead, it exclusively maps to **MySQL Stored Procedures**. The Node server acts only as a secure middleware layer to validate requests, issue JWTs, and call the pre-compiled database procedures.
-
-## Key Features
-- **Robust Authentication:** Secure user registration and login using `bcrypt` for password hashing and `jsonwebtoken` for stateless session management.
-- **Stored Procedure Driven:** 100% of database interactions run through isolated Stored Procedures.
-- **Local File Management (Design):** Designed to handle PDF file uploads strictly on the local filesystem (`/uploads`), keeping heavy binaries decoupled from the SQL database.
+## System Functionalities
+- **Stateless Authentication:** User registration and login utilizing JWT for session authorization via HTTP Bearer Headers. Password hashing via `bcrypt`.
+- **Stored Procedure Driven Security:** The backend architecture strictly prohibits raw SQL queries. 100% of data querying and mutation operations (Users, Searches, Filters, Uploads) are handled through pre-compiled MySQL Stored Procedures to prevent SQL injection.
+- **Local File Management:** Binary files (PDFs) are decoupled from the SQL database. `multer` processes incoming `multipart/form-data`, validates MIME types (`application/pdf`) and size limits (max 30MB), renames them securely, and stores them in the local `/uploads` directory.
+- **Data Pagination Algorithms:** Provides a search and filtering endpoint (`/api/notes/search`) that calculates dynamic pagination metadata (21 records per page) optimized for the frontend grid consumption.
 
 ## Installation & Setup
 
@@ -35,33 +37,31 @@ Instead, it exclusively maps to **MySQL Stored Procedures**. The Node server act
 
 3. **Database Initialization:**
    Ensure you have a local MySQL instance running on port `3306`.
-   - Run the provided initialization script to create the DB, tables, and Stored Procedures automatically:
-     ```bash
-     node setup-db.js
-     ```
+   - Execute the SQL script located at `db/init.sql` directly into your MySQL server. This will create the `UNotes` database, its table schema (users, careers, subjects, notes), and the required Stored Procedures.
 
 4. **Environment Variables:**
-   Create a `.env` file in the root directory (never commit this file) with the following structure:
+   Create a `.env` file in the root directory with the following configuration:
    ```env
    DB_HOST=localhost
    DB_USER=root
    DB_PASS=
    DB_NAME=UNotes
-   JWT_SECRET=your_super_secret_key
+   JWT_SECRET=your_super_secret_key_here
    PORT=5000
    ```
 
 5. **Start the server:**
    ```bash
+   # Development mode (nodemon)
+   npm run dev
+   
+   # Production mode
    node server.js
    ```
-   The API will be available at `http://localhost:5000`.
+   The REST API will be available at `http://localhost:5000`.
 
-## Project Structure
-- `/config`: Database connection instances.
-- `/db`: Raw `.sql` initialization files containing schemas and Stored Procedures.
-- `/routes`: Express route handlers (e.g., `/api/auth/register`).
-- `/uploads`: Ignored directory intended for PDF binary storage.
-
----
-*Built by Ixion Systems.*
+## Directory Structure
+- `/config`: Database connection pool instances.
+- `/db`: SQL source files containing schema definitions and Stored Procedures.
+- `/routes`: Express route handlers and controller logic (`/api/auth`, `/api/notes`).
+- `/uploads`: File system storage path for PDF blobs (ignored by git, maintained via `.gitkeep`).
