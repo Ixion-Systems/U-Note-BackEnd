@@ -1,12 +1,15 @@
-# U-Notes // Backend API
+<div align="center">
+  <img src="assets/U-NOTES%20LOGO%20Orange.svg" alt="U-Notes Logo" width="200" style="margin-bottom: 20px;" />
 
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
-![JWT](https://img.shields.io/badge/JSON_Web_Tokens-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white)
-![Multer](https://img.shields.io/badge/Multer-F24E1E?style=for-the-badge&logo=npm&logoColor=white)
+  # U-Notes // Backend API
+   ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+   ![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+   ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+   ![JWT](https://img.shields.io/badge/JSON_Web_Tokens-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white)
+   ![Multer](https://img.shields.io/badge/Multer-F24E1E?style=for-the-badge&logo=npm&logoColor=white)
+</div>
 
-Technical documentation for the **U-Notes Backend Repository**. This Node.js/Express server is the secure REST API for the U-Notes platform, managing user authentication, database connections, and file processing.
+Welcome to the backend repository for **U-Notes**. This Node.js/Express server acts as the secure backbone for the U-Notes platform, handling user authentication, database connections, and (in upcoming modules) strict local file processing.
 
 ## Tech Stack & Dependencies
 - **Runtime:** Node.js
